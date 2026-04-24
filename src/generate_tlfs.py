@@ -5,15 +5,30 @@ Produces three output tables in ``output/``:
  - Table 2: Adverse Events by System Organ Class and Preferred Term (from ADAE)
  - Table 3: Summary of Vital Signs by PARAMCD (from ADVS)
 
-Each table is written as both a ``.csv`` (machine-readable) and a ``.txt``
-fixed-width report (human-readable).
+Each table is written in four formats:
+ - ``.csv`` (machine-readable, subject count carried as a sub-header row)
+ - ``.txt`` (fixed-width human-readable report with two-line column headers)
+ - ``.html`` (styled HTML with two-row ``<thead>``)
+ - ``.pdf`` (landscape PDF rendered via reportlab)
 """
 from __future__ import annotations
 
+from html import escape
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4, landscape
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.units import mm
+from reportlab.platypus import (
+    Paragraph,
+    SimpleDocTemplate,
+    Spacer,
+    Table,
+    TableStyle,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 ADAM_DIR = ROOT / "data" / "adam"
@@ -226,27 +241,107 @@ def _write_txt(df: pd.DataFrame, path: Path, title: str, col_ns: dict[str, int])
     path.write_text("\n".join(lines) + "\n")
 
 
+_HTML_CSS = """
+  body { font-family: Arial, Helvetica, sans-serif; margin: 2em; color: #222; }
+  h1 { font-size: 1.15em; margin-bottom: 0.8em; }
+  table.tlf { border-collapse: collapse; font-size: 0.9em; }
+  table.tlf thead tr { background: #f0f0f0; }
+  table.tlf th, table.tlf td {
+    border: 1px solid #999; padding: 4px 8px; vertical-align: top;
+  }
+  table.tlf th { text-align: center; font-weight: 600; }
+  table.tlf td { white-space: pre; font-family: "Courier New", monospace; }
+  table.tlf td.label, table.tlf th.label { text-align: left; font-family: Arial; white-space: normal; }
+  table.tlf tr.subhead th { font-weight: 400; font-style: italic; }
+"""
+
+
+def _write_html(df: pd.DataFrame, path: Path, title: str, col_ns: dict[str, int]) -> None:
+    label_cols = [c for c in df.columns if c not in col_ns]
+    head_row1 = "".join(
+        f'<th class="{"label" if c in label_cols else "num"}">{escape(str(c))}</th>'
+        for c in df.columns
+    )
+    head_row2 = "".join(
+        f'<th class="{"label" if c in label_cols else "num"}">{escape(_n_sub(c, col_ns))}</th>'
+        for c in df.columns
+    )
+    body_rows = []
+    for _, row in df.iterrows():
+        cells = "".join(
+            f'<td class="{"label" if c in label_cols else "num"}">{escape(str(row[c]))}</td>'
+            for c in df.columns
+        )
+        body_rows.append(f"<tr>{cells}</tr>")
+    html = (
+        "<!DOCTYPE html>\n"
+        f"<html><head><meta charset='utf-8'><title>{escape(title)}</title>"
+        f"<style>{_HTML_CSS}</style></head><body>"
+        f"<h1>{escape(title)}</h1>"
+        "<table class='tlf'>"
+        f"<thead><tr>{head_row1}</tr><tr class='subhead'>{head_row2}</tr></thead>"
+        f"<tbody>{''.join(body_rows)}</tbody>"
+        "</table></body></html>\n"
+    )
+    path.write_text(html)
+
+
+def _write_pdf(df: pd.DataFrame, path: Path, title: str, col_ns: dict[str, int]) -> None:
+    doc = SimpleDocTemplate(
+        str(path),
+        pagesize=landscape(A4),
+        leftMargin=12 * mm,
+        rightMargin=12 * mm,
+        topMargin=12 * mm,
+        bottomMargin=12 * mm,
+    )
+    styles = getSampleStyleSheet()
+    header_row1 = list(df.columns)
+    header_row2 = [_n_sub(c, col_ns) for c in df.columns]
+    data = [header_row1, header_row2] + df.astype(str).values.tolist()
+    tbl = Table(data, repeatRows=2)
+    tbl.setStyle(TableStyle([
+        ("BACKGROUND", (0, 0), (-1, 1), colors.lightgrey),
+        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("FONTNAME", (0, 1), (-1, 1), "Helvetica-Oblique"),
+        ("FONTSIZE", (0, 0), (-1, -1), 8),
+        ("ALIGN", (0, 0), (-1, 1), "CENTER"),
+        ("VALIGN", (0, 0), (-1, -1), "TOP"),
+        ("GRID", (0, 0), (-1, -1), 0.25, colors.grey),
+        ("ROWBACKGROUNDS", (0, 2), (-1, -1), [colors.whitesmoke, colors.white]),
+        ("LEFTPADDING", (0, 0), (-1, -1), 4),
+        ("RIGHTPADDING", (0, 0), (-1, -1), 4),
+        ("TOPPADDING", (0, 0), (-1, -1), 2),
+        ("BOTTOMPADDING", (0, 0), (-1, -1), 2),
+    ]))
+    doc.build([Paragraph(escape(title), styles["Title"]), Spacer(1, 6), tbl])
+
+
+def _write_all(df: pd.DataFrame, stem: str, title: str, col_ns: dict[str, int]) -> None:
+    _write_csv(df, OUT_DIR / f"{stem}.csv", col_ns)
+    _write_txt(df, OUT_DIR / f"{stem}.txt", title, col_ns)
+    _write_html(df, OUT_DIR / f"{stem}.html", title, col_ns)
+    _write_pdf(df, OUT_DIR / f"{stem}.pdf", title, col_ns)
+
+
 def main() -> None:
     adsl = pd.read_csv(ADAM_DIR / "ADSL.csv")
     adae = pd.read_csv(ADAM_DIR / "ADAE.csv")
     advs = pd.read_csv(ADAM_DIR / "ADVS.csv")
 
     t1, t1_ns = table_demographics(adsl)
-    _write_csv(t1, OUT_DIR / "t_demographics.csv", t1_ns)
-    _write_txt(t1, OUT_DIR / "t_demographics.txt",
+    _write_all(t1, "t_demographics",
                "Table 1: Demographic and Baseline Characteristics (Safety Population)",
                t1_ns)
 
     t2, t2_ns = table_ae_soc_pt(adae, adsl)
-    _write_csv(t2, OUT_DIR / "t_ae_soc_pt.csv", t2_ns)
-    _write_txt(t2, OUT_DIR / "t_ae_soc_pt.txt",
+    _write_all(t2, "t_ae_soc_pt",
                "Table 2: Treatment-Emergent Adverse Events by System Organ Class "
                "and Preferred Term (Safety Population)",
                t2_ns)
 
     t3, t3_ns = table_vs_summary(advs, adsl)
-    _write_csv(t3, OUT_DIR / "t_vs_summary.csv", t3_ns)
-    _write_txt(t3, OUT_DIR / "t_vs_summary.txt",
+    _write_all(t3, "t_vs_summary",
                "Table 3: Summary Statistics of Vital Signs by Parameter and Visit",
                t3_ns)
 
