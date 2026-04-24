@@ -2,6 +2,7 @@ Table 3: Summary Statistics of Vital Signs by Parameter and Visit
 =================================================================
 
 PARAMCD  PARAM                            Visit             Statistic  Placebo  ABC Drug 50 mg
+                                                                       (N=25)   (N=25)        
 ----------------------------------------------------------------------------------------------
 DIABP    Diastolic Blood Pressure (mmHg)  Screening         N          25       25            
 DIABP    Diastolic Blood Pressure (mmHg)  Screening         Mean       79.28    79.60         

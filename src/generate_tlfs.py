@@ -41,7 +41,7 @@ def _fmt_median_range(series: pd.Series) -> str:
     return f"{s.median():6.1f} ({s.min():.1f}, {s.max():.1f})"
 
 
-def table_demographics(adsl: pd.DataFrame) -> pd.DataFrame:
+def table_demographics(adsl: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, int]]:
     trt_order = (
         adsl[["TRT01P", "TRT01PN"]]
         .drop_duplicates()
@@ -56,9 +56,6 @@ def table_demographics(adsl: pd.DataFrame) -> pd.DataFrame:
 
     def add_row(label: str, values: dict) -> None:
         rows.append({"Characteristic": label, **values})
-
-    add_row("Number of Subjects (N)",
-            {trt: f"{len(df):d}" for trt, df in groups.items()})
 
     add_row("Age (years)", {trt: "" for trt in col_order})
     add_row("  Mean (SD)", {trt: _fmt_mean_sd(df["AGE"]) for trt, df in groups.items()})
@@ -98,10 +95,11 @@ def table_demographics(adsl: pd.DataFrame) -> pd.DataFrame:
         )
 
     df_out = pd.DataFrame(rows, columns=["Characteristic", *col_order])
-    return df_out
+    col_ns = {trt: len(df) for trt, df in groups.items()}
+    return df_out, col_ns
 
 
-def table_ae_soc_pt(adae: pd.DataFrame, adsl: pd.DataFrame) -> pd.DataFrame:
+def table_ae_soc_pt(adae: pd.DataFrame, adsl: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, int]]:
     trt_order = (
         adsl[["TRT01A", "TRT01AN"]]
         .drop_duplicates()
@@ -137,14 +135,11 @@ def table_ae_soc_pt(adae: pd.DataFrame, adsl: pd.DataFrame) -> pd.DataFrame:
                 **{trt: fmt(pt_df, trt) for trt in trt_order},
             })
 
-    header_cols = [f"{t} (N={trt_totals[t]})" for t in trt_order]
-    rename = {t: h for t, h in zip(trt_order, header_cols)}
-    df_out = pd.DataFrame(rows).rename(columns=rename)
-    df_out = df_out[["SOC / Preferred Term", *header_cols]]
-    return df_out
+    df_out = pd.DataFrame(rows, columns=["SOC / Preferred Term", *trt_order])
+    return df_out, trt_totals
 
 
-def table_vs_summary(advs: pd.DataFrame) -> pd.DataFrame:
+def table_vs_summary(advs: pd.DataFrame, adsl: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, int]]:
     trt_order = (
         advs[["TRTA", "TRTAN"]]
         .drop_duplicates()
@@ -195,14 +190,37 @@ def table_vs_summary(advs: pd.DataFrame) -> pd.DataFrame:
                     row[trt] = _stat(vdf[vdf["TRTA"] == trt]["AVAL"], stat)
                 rows.append(row)
 
-    return pd.DataFrame(rows, columns=["PARAMCD", "PARAM", "Visit", "Statistic", *trt_order])
+    df_out = pd.DataFrame(rows, columns=["PARAMCD", "PARAM", "Visit", "Statistic", *trt_order])
+    n_by_trt = adsl.groupby("TRT01A", observed=False).size().to_dict()
+    col_ns = {t: int(n_by_trt.get(t, 0)) for t in trt_order}
+    return df_out, col_ns
 
 
-def _write_txt(df: pd.DataFrame, path: Path, title: str) -> None:
-    col_widths = {c: max(len(str(c)), df[c].astype(str).map(len).max()) for c in df.columns}
-    header = "  ".join(str(c).ljust(col_widths[c]) for c in df.columns)
-    sep = "-" * len(header)
-    lines = [title, "=" * len(title), "", header, sep]
+def _n_sub(col: str, col_ns: dict[str, int]) -> str:
+    return f"(N={col_ns[col]})" if col in col_ns else ""
+
+
+def _write_csv(df: pd.DataFrame, path: Path, col_ns: dict[str, int]) -> None:
+    sub = pd.DataFrame(
+        [[_n_sub(c, col_ns) for c in df.columns]],
+        columns=df.columns,
+    )
+    pd.concat([sub, df], ignore_index=True).to_csv(path, index=False)
+
+
+def _write_txt(df: pd.DataFrame, path: Path, title: str, col_ns: dict[str, int]) -> None:
+    col_widths = {
+        c: max(
+            len(str(c)),
+            len(_n_sub(c, col_ns)),
+            df[c].astype(str).map(len).max(),
+        )
+        for c in df.columns
+    }
+    header1 = "  ".join(str(c).ljust(col_widths[c]) for c in df.columns)
+    header2 = "  ".join(_n_sub(c, col_ns).ljust(col_widths[c]) for c in df.columns)
+    sep = "-" * len(header1)
+    lines = [title, "=" * len(title), "", header1, header2, sep]
     for _, row in df.iterrows():
         lines.append("  ".join(str(row[c]).ljust(col_widths[c]) for c in df.columns))
     path.write_text("\n".join(lines) + "\n")
@@ -213,21 +231,24 @@ def main() -> None:
     adae = pd.read_csv(ADAM_DIR / "ADAE.csv")
     advs = pd.read_csv(ADAM_DIR / "ADVS.csv")
 
-    t1 = table_demographics(adsl)
-    t1.to_csv(OUT_DIR / "t_demographics.csv", index=False)
+    t1, t1_ns = table_demographics(adsl)
+    _write_csv(t1, OUT_DIR / "t_demographics.csv", t1_ns)
     _write_txt(t1, OUT_DIR / "t_demographics.txt",
-               "Table 1: Demographic and Baseline Characteristics (Safety Population)")
+               "Table 1: Demographic and Baseline Characteristics (Safety Population)",
+               t1_ns)
 
-    t2 = table_ae_soc_pt(adae, adsl)
-    t2.to_csv(OUT_DIR / "t_ae_soc_pt.csv", index=False)
+    t2, t2_ns = table_ae_soc_pt(adae, adsl)
+    _write_csv(t2, OUT_DIR / "t_ae_soc_pt.csv", t2_ns)
     _write_txt(t2, OUT_DIR / "t_ae_soc_pt.txt",
                "Table 2: Treatment-Emergent Adverse Events by System Organ Class "
-               "and Preferred Term (Safety Population)")
+               "and Preferred Term (Safety Population)",
+               t2_ns)
 
-    t3 = table_vs_summary(advs)
-    t3.to_csv(OUT_DIR / "t_vs_summary.csv", index=False)
+    t3, t3_ns = table_vs_summary(advs, adsl)
+    _write_csv(t3, OUT_DIR / "t_vs_summary.csv", t3_ns)
     _write_txt(t3, OUT_DIR / "t_vs_summary.txt",
-               "Table 3: Summary Statistics of Vital Signs by Parameter and Visit")
+               "Table 3: Summary Statistics of Vital Signs by Parameter and Visit",
+               t3_ns)
 
     print(f"TLFs written to {OUT_DIR}")
 

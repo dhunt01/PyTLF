@@ -1,4 +1,5 @@
 PARAMCD,PARAM,Visit,Statistic,Placebo,ABC Drug 50 mg
+,,,,(N=25),(N=25)
 DIABP,Diastolic Blood Pressure (mmHg),Screening,N,25,25
 DIABP,Diastolic Blood Pressure (mmHg),Screening,Mean,79.28,79.60
 DIABP,Diastolic Blood Pressure (mmHg),Screening,SD,5.70,6.98
