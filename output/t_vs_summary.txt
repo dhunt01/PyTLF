@@ -1,36 +1,191 @@
 Table 3: Summary Statistics of Vital Signs by Parameter and Visit
 =================================================================
 
-PARAMCD  PARAM                            Visit             N   Mean    SD     Median  Min    Max  
----------------------------------------------------------------------------------------------------
-DIABP    Diastolic Blood Pressure (mmHg)  Screening         50  79.44   6.31   79.0    65.0   94.0 
-DIABP    Diastolic Blood Pressure (mmHg)  Baseline          50  80.56   5.85   80.5    67.0   98.0 
-DIABP    Diastolic Blood Pressure (mmHg)  Week 2            50  79.56   5.49   79.5    67.0   91.0 
-DIABP    Diastolic Blood Pressure (mmHg)  Week 4            49  79.9    6.18   80.0    63.0   92.0 
-DIABP    Diastolic Blood Pressure (mmHg)  Week 8            48  77.83   5.32   77.0    67.0   88.0 
-DIABP    Diastolic Blood Pressure (mmHg)  End Of Treatment  46  78.93   6.7    79.0    66.0   97.0 
-HEIGHT   Height (cm)                      Screening         50  168.61  8.66   168.7   145.8  190.1
-PULSE    Pulse Rate (beats/min)           Screening         50  72.02   7.03   71.5    53.0   87.0 
-PULSE    Pulse Rate (beats/min)           Baseline          50  71.7    6.52   71.0    59.0   87.0 
-PULSE    Pulse Rate (beats/min)           Week 2            50  71.3    7.03   70.5    56.0   86.0 
-PULSE    Pulse Rate (beats/min)           Week 4            49  72.84   5.68   73.0    60.0   82.0 
-PULSE    Pulse Rate (beats/min)           Week 8            48  71.04   7.26   72.0    56.0   85.0 
-PULSE    Pulse Rate (beats/min)           End Of Treatment  46  71.74   7.07   71.0    56.0   86.0 
-SYSBP    Systolic Blood Pressure (mmHg)   Screening         50  128.92  9.16   127.0   114.0  155.0
-SYSBP    Systolic Blood Pressure (mmHg)   Baseline          50  127.0   8.72   128.0   107.0  143.0
-SYSBP    Systolic Blood Pressure (mmHg)   Week 2            50  125.62  10.23  127.0   102.0  145.0
-SYSBP    Systolic Blood Pressure (mmHg)   Week 4            49  125.45  7.92   127.0   108.0  142.0
-SYSBP    Systolic Blood Pressure (mmHg)   Week 8            48  127.65  9.5    129.0   107.0  155.0
-SYSBP    Systolic Blood Pressure (mmHg)   End Of Treatment  46  127.02  9.61   125.5   105.0  147.0
-TEMP     Temperature (C)                  Screening         50  36.82   0.33   36.8    36.2   37.6 
-TEMP     Temperature (C)                  Baseline          50  36.81   0.28   36.8    36.2   37.3 
-TEMP     Temperature (C)                  Week 2            50  36.82   0.36   36.8    36.0   37.5 
-TEMP     Temperature (C)                  Week 4            49  36.74   0.34   36.8    35.9   37.6 
-TEMP     Temperature (C)                  Week 8            48  36.8    0.3    36.8    36.1   37.4 
-TEMP     Temperature (C)                  End Of Treatment  46  36.75   0.24   36.8    36.3   37.2 
-WEIGHT   Weight (kg)                      Screening         50  78.23   11.65  78.9    48.8   106.0
-WEIGHT   Weight (kg)                      Baseline          50  78.35   10.39  77.1    50.9   114.1
-WEIGHT   Weight (kg)                      Week 2            50  77.41   10.8   77.15   54.2   101.3
-WEIGHT   Weight (kg)                      Week 4            49  78.84   11.84  80.4    42.9   99.2 
-WEIGHT   Weight (kg)                      Week 8            48  79.36   12.0   77.3    52.5   115.2
-WEIGHT   Weight (kg)                      End Of Treatment  46  78.72   12.01  79.2    47.7   95.7 
+PARAMCD  PARAM                            Visit             Statistic  Placebo  ABC Drug 50 mg
+----------------------------------------------------------------------------------------------
+DIABP    Diastolic Blood Pressure (mmHg)  Screening         N          25       25            
+DIABP    Diastolic Blood Pressure (mmHg)  Screening         Mean       79.28    79.60         
+DIABP    Diastolic Blood Pressure (mmHg)  Screening         SD         5.70     6.98          
+DIABP    Diastolic Blood Pressure (mmHg)  Screening         Median     79.00    79.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Screening         Min        69.00    65.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Screening         Max        93.00    94.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Baseline          N          25       25            
+DIABP    Diastolic Blood Pressure (mmHg)  Baseline          Mean       80.80    80.32         
+DIABP    Diastolic Blood Pressure (mmHg)  Baseline          SD         5.36     6.41          
+DIABP    Diastolic Blood Pressure (mmHg)  Baseline          Median     82.00    79.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Baseline          Min        69.00    67.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Baseline          Max        91.00    98.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 2            N          25       25            
+DIABP    Diastolic Blood Pressure (mmHg)  Week 2            Mean       79.88    79.24         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 2            SD         6.27     4.68          
+DIABP    Diastolic Blood Pressure (mmHg)  Week 2            Median     81.00    79.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 2            Min        67.00    73.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 2            Max        89.00    91.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 4            N          24       25            
+DIABP    Diastolic Blood Pressure (mmHg)  Week 4            Mean       80.46    79.36         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 4            SD         6.53     5.90          
+DIABP    Diastolic Blood Pressure (mmHg)  Week 4            Median     80.00    79.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 4            Min        68.00    63.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 4            Max        92.00    90.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 8            N          24       24            
+DIABP    Diastolic Blood Pressure (mmHg)  Week 8            Mean       79.17    76.50         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 8            SD         5.42     4.97          
+DIABP    Diastolic Blood Pressure (mmHg)  Week 8            Median     78.00    76.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 8            Min        70.00    67.00         
+DIABP    Diastolic Blood Pressure (mmHg)  Week 8            Max        88.00    87.00         
+DIABP    Diastolic Blood Pressure (mmHg)  End Of Treatment  N          23       23            
+DIABP    Diastolic Blood Pressure (mmHg)  End Of Treatment  Mean       81.13    76.74         
+DIABP    Diastolic Blood Pressure (mmHg)  End Of Treatment  SD         6.41     6.38          
+DIABP    Diastolic Blood Pressure (mmHg)  End Of Treatment  Median     80.00    78.00         
+DIABP    Diastolic Blood Pressure (mmHg)  End Of Treatment  Min        71.00    66.00         
+DIABP    Diastolic Blood Pressure (mmHg)  End Of Treatment  Max        97.00    86.00         
+HEIGHT   Height (cm)                      Screening         N          25       25            
+HEIGHT   Height (cm)                      Screening         Mean       167.77   169.45        
+HEIGHT   Height (cm)                      Screening         SD         10.33    6.69          
+HEIGHT   Height (cm)                      Screening         Median     168.50   168.80        
+HEIGHT   Height (cm)                      Screening         Min        145.80   155.40        
+HEIGHT   Height (cm)                      Screening         Max        190.10   184.00        
+PULSE    Pulse Rate (beats/min)           Screening         N          25       25            
+PULSE    Pulse Rate (beats/min)           Screening         Mean       72.16    71.88         
+PULSE    Pulse Rate (beats/min)           Screening         SD         6.34     7.79          
+PULSE    Pulse Rate (beats/min)           Screening         Median     72.00    71.00         
+PULSE    Pulse Rate (beats/min)           Screening         Min        59.00    53.00         
+PULSE    Pulse Rate (beats/min)           Screening         Max        85.00    87.00         
+PULSE    Pulse Rate (beats/min)           Baseline          N          25       25            
+PULSE    Pulse Rate (beats/min)           Baseline          Mean       71.96    71.44         
+PULSE    Pulse Rate (beats/min)           Baseline          SD         6.94     6.21          
+PULSE    Pulse Rate (beats/min)           Baseline          Median     71.00    71.00         
+PULSE    Pulse Rate (beats/min)           Baseline          Min        59.00    63.00         
+PULSE    Pulse Rate (beats/min)           Baseline          Max        86.00    87.00         
+PULSE    Pulse Rate (beats/min)           Week 2            N          25       25            
+PULSE    Pulse Rate (beats/min)           Week 2            Mean       70.60    72.00         
+PULSE    Pulse Rate (beats/min)           Week 2            SD         6.32     7.75          
+PULSE    Pulse Rate (beats/min)           Week 2            Median     69.00    71.00         
+PULSE    Pulse Rate (beats/min)           Week 2            Min        60.00    56.00         
+PULSE    Pulse Rate (beats/min)           Week 2            Max        85.00    86.00         
+PULSE    Pulse Rate (beats/min)           Week 4            N          24       25            
+PULSE    Pulse Rate (beats/min)           Week 4            Mean       73.54    72.16         
+PULSE    Pulse Rate (beats/min)           Week 4            SD         5.56     5.83          
+PULSE    Pulse Rate (beats/min)           Week 4            Median     74.50    72.00         
+PULSE    Pulse Rate (beats/min)           Week 4            Min        60.00    61.00         
+PULSE    Pulse Rate (beats/min)           Week 4            Max        82.00    82.00         
+PULSE    Pulse Rate (beats/min)           Week 8            N          24       24            
+PULSE    Pulse Rate (beats/min)           Week 8            Mean       71.46    70.62         
+PULSE    Pulse Rate (beats/min)           Week 8            SD         7.08     7.56          
+PULSE    Pulse Rate (beats/min)           Week 8            Median     73.50    71.00         
+PULSE    Pulse Rate (beats/min)           Week 8            Min        57.00    56.00         
+PULSE    Pulse Rate (beats/min)           Week 8            Max        85.00    84.00         
+PULSE    Pulse Rate (beats/min)           End Of Treatment  N          23       23            
+PULSE    Pulse Rate (beats/min)           End Of Treatment  Mean       72.30    71.17         
+PULSE    Pulse Rate (beats/min)           End Of Treatment  SD         6.96     7.28          
+PULSE    Pulse Rate (beats/min)           End Of Treatment  Median     72.00    71.00         
+PULSE    Pulse Rate (beats/min)           End Of Treatment  Min        57.00    56.00         
+PULSE    Pulse Rate (beats/min)           End Of Treatment  Max        85.00    86.00         
+SYSBP    Systolic Blood Pressure (mmHg)   Screening         N          25       25            
+SYSBP    Systolic Blood Pressure (mmHg)   Screening         Mean       129.72   128.12        
+SYSBP    Systolic Blood Pressure (mmHg)   Screening         SD         10.11    8.23          
+SYSBP    Systolic Blood Pressure (mmHg)   Screening         Median     127.00   127.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Screening         Min        114.00   116.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Screening         Max        147.00   155.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Baseline          N          25       25            
+SYSBP    Systolic Blood Pressure (mmHg)   Baseline          Mean       126.88   127.12        
+SYSBP    Systolic Blood Pressure (mmHg)   Baseline          SD         9.32     8.26          
+SYSBP    Systolic Blood Pressure (mmHg)   Baseline          Median     126.00   129.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Baseline          Min        107.00   107.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Baseline          Max        143.00   140.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 2            N          25       25            
+SYSBP    Systolic Blood Pressure (mmHg)   Week 2            Mean       126.92   124.32        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 2            SD         10.00    10.48         
+SYSBP    Systolic Blood Pressure (mmHg)   Week 2            Median     128.00   126.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 2            Min        102.00   104.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 2            Max        145.00   145.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 4            N          24       25            
+SYSBP    Systolic Blood Pressure (mmHg)   Week 4            Mean       127.38   123.60        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 4            SD         7.76     7.77          
+SYSBP    Systolic Blood Pressure (mmHg)   Week 4            Median     128.00   124.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 4            Min        108.00   109.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 4            Max        142.00   139.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 8            N          24       24            
+SYSBP    Systolic Blood Pressure (mmHg)   Week 8            Mean       128.71   126.58        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 8            SD         10.75    8.16          
+SYSBP    Systolic Blood Pressure (mmHg)   Week 8            Median     127.00   129.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 8            Min        111.00   107.00        
+SYSBP    Systolic Blood Pressure (mmHg)   Week 8            Max        155.00   137.00        
+SYSBP    Systolic Blood Pressure (mmHg)   End Of Treatment  N          23       23            
+SYSBP    Systolic Blood Pressure (mmHg)   End Of Treatment  Mean       128.52   125.52        
+SYSBP    Systolic Blood Pressure (mmHg)   End Of Treatment  SD         8.93     10.22         
+SYSBP    Systolic Blood Pressure (mmHg)   End Of Treatment  Median     126.00   124.00        
+SYSBP    Systolic Blood Pressure (mmHg)   End Of Treatment  Min        108.00   105.00        
+SYSBP    Systolic Blood Pressure (mmHg)   End Of Treatment  Max        147.00   143.00        
+TEMP     Temperature (C)                  Screening         N          25       25            
+TEMP     Temperature (C)                  Screening         Mean       36.85    36.80         
+TEMP     Temperature (C)                  Screening         SD         0.34     0.34          
+TEMP     Temperature (C)                  Screening         Median     36.80    36.70         
+TEMP     Temperature (C)                  Screening         Min        36.30    36.20         
+TEMP     Temperature (C)                  Screening         Max        37.60    37.30         
+TEMP     Temperature (C)                  Baseline          N          25       25            
+TEMP     Temperature (C)                  Baseline          Mean       36.77    36.85         
+TEMP     Temperature (C)                  Baseline          SD         0.30     0.26          
+TEMP     Temperature (C)                  Baseline          Median     36.70    36.90         
+TEMP     Temperature (C)                  Baseline          Min        36.20    36.30         
+TEMP     Temperature (C)                  Baseline          Max        37.30    37.30         
+TEMP     Temperature (C)                  Week 2            N          25       25            
+TEMP     Temperature (C)                  Week 2            Mean       36.81    36.82         
+TEMP     Temperature (C)                  Week 2            SD         0.39     0.34          
+TEMP     Temperature (C)                  Week 2            Median     36.80    36.80         
+TEMP     Temperature (C)                  Week 2            Min        36.00    36.10         
+TEMP     Temperature (C)                  Week 2            Max        37.50    37.50         
+TEMP     Temperature (C)                  Week 4            N          24       25            
+TEMP     Temperature (C)                  Week 4            Mean       36.82    36.67         
+TEMP     Temperature (C)                  Week 4            SD         0.35     0.33          
+TEMP     Temperature (C)                  Week 4            Median     36.80    36.70         
+TEMP     Temperature (C)                  Week 4            Min        36.00    35.90         
+TEMP     Temperature (C)                  Week 4            Max        37.60    37.20         
+TEMP     Temperature (C)                  Week 8            N          24       24            
+TEMP     Temperature (C)                  Week 8            Mean       36.77    36.83         
+TEMP     Temperature (C)                  Week 8            SD         0.31     0.29          
+TEMP     Temperature (C)                  Week 8            Median     36.85    36.80         
+TEMP     Temperature (C)                  Week 8            Min        36.10    36.10         
+TEMP     Temperature (C)                  Week 8            Max        37.40    37.40         
+TEMP     Temperature (C)                  End Of Treatment  N          23       23            
+TEMP     Temperature (C)                  End Of Treatment  Mean       36.77    36.73         
+TEMP     Temperature (C)                  End Of Treatment  SD         0.25     0.22          
+TEMP     Temperature (C)                  End Of Treatment  Median     36.80    36.70         
+TEMP     Temperature (C)                  End Of Treatment  Min        36.30    36.40         
+TEMP     Temperature (C)                  End Of Treatment  Max        37.20    37.20         
+WEIGHT   Weight (kg)                      Screening         N          25       25            
+WEIGHT   Weight (kg)                      Screening         Mean       77.89    78.57         
+WEIGHT   Weight (kg)                      Screening         SD         12.18    11.33         
+WEIGHT   Weight (kg)                      Screening         Median     76.20    79.00         
+WEIGHT   Weight (kg)                      Screening         Min        48.80    55.00         
+WEIGHT   Weight (kg)                      Screening         Max        100.60   106.00        
+WEIGHT   Weight (kg)                      Baseline          N          25       25            
+WEIGHT   Weight (kg)                      Baseline          Mean       78.54    78.15         
+WEIGHT   Weight (kg)                      Baseline          SD         9.68     11.26         
+WEIGHT   Weight (kg)                      Baseline          Median     76.00    78.00         
+WEIGHT   Weight (kg)                      Baseline          Min        60.20    50.90         
+WEIGHT   Weight (kg)                      Baseline          Max        98.80    114.10        
+WEIGHT   Weight (kg)                      Week 2            N          25       25            
+WEIGHT   Weight (kg)                      Week 2            Mean       77.98    76.84         
+WEIGHT   Weight (kg)                      Week 2            SD         9.56     12.08         
+WEIGHT   Weight (kg)                      Week 2            Median     78.40    74.10         
+WEIGHT   Weight (kg)                      Week 2            Min        58.00    54.20         
+WEIGHT   Weight (kg)                      Week 2            Max        95.30    101.30        
+WEIGHT   Weight (kg)                      Week 4            N          24       25            
+WEIGHT   Weight (kg)                      Week 4            Mean       78.83    78.86         
+WEIGHT   Weight (kg)                      Week 4            SD         10.77    13.00         
+WEIGHT   Weight (kg)                      Week 4            Median     79.15    80.50         
+WEIGHT   Weight (kg)                      Week 4            Min        57.80    42.90         
+WEIGHT   Weight (kg)                      Week 4            Max        99.20    98.10         
+WEIGHT   Weight (kg)                      Week 8            N          24       24            
+WEIGHT   Weight (kg)                      Week 8            Mean       81.91    76.80         
+WEIGHT   Weight (kg)                      Week 8            SD         11.55    12.13         
+WEIGHT   Weight (kg)                      Week 8            Median     79.35    75.40         
+WEIGHT   Weight (kg)                      Week 8            Min        60.10    52.50         
+WEIGHT   Weight (kg)                      Week 8            Max        115.20   105.80        
+WEIGHT   Weight (kg)                      End Of Treatment  N          23       23            
+WEIGHT   Weight (kg)                      End Of Treatment  Mean       79.43    78.00         
+WEIGHT   Weight (kg)                      End Of Treatment  SD         11.72    12.51         
+WEIGHT   Weight (kg)                      End Of Treatment  Median     78.40    80.50         
+WEIGHT   Weight (kg)                      End Of Treatment  Min        52.70    47.70         
+WEIGHT   Weight (kg)                      End Of Treatment  Max        95.70    95.20         

@@ -145,32 +145,57 @@ def table_ae_soc_pt(adae: pd.DataFrame, adsl: pd.DataFrame) -> pd.DataFrame:
 
 
 def table_vs_summary(advs: pd.DataFrame) -> pd.DataFrame:
-    rows = []
+    trt_order = (
+        advs[["TRTA", "TRTAN"]]
+        .drop_duplicates()
+        .sort_values("TRTAN")["TRTA"]
+        .tolist()
+    )
     visits_order = (
         advs[["AVISIT", "AVISITN"]]
         .drop_duplicates()
         .sort_values("AVISITN")["AVISIT"]
         .tolist()
     )
+    stats = ["N", "Mean", "SD", "Median", "Min", "Max"]
+
+    def _stat(series: pd.Series, name: str) -> str:
+        s = series.dropna()
+        if s.empty:
+            return ""
+        if name == "N":
+            return f"{int(s.count())}"
+        if name == "Mean":
+            return f"{s.mean():.2f}"
+        if name == "SD":
+            return f"{s.std(ddof=1):.2f}" if s.count() > 1 else ""
+        if name == "Median":
+            return f"{s.median():.2f}"
+        if name == "Min":
+            return f"{s.min():.2f}"
+        if name == "Max":
+            return f"{s.max():.2f}"
+        return ""
+
+    rows: list[dict] = []
     for pcd, grp in advs.groupby("PARAMCD", sort=False):
         param = grp["PARAM"].iloc[0]
         for visit in visits_order:
             vdf = grp[grp["AVISIT"] == visit]
-            s = vdf["AVAL"].dropna()
-            if s.empty:
+            if vdf["AVAL"].dropna().empty:
                 continue
-            rows.append({
-                "PARAMCD": pcd,
-                "PARAM": param,
-                "Visit": visit,
-                "N": int(s.count()),
-                "Mean": round(s.mean(), 2),
-                "SD": round(s.std(ddof=1), 2) if s.count() > 1 else np.nan,
-                "Median": round(s.median(), 2),
-                "Min": round(s.min(), 2),
-                "Max": round(s.max(), 2),
-            })
-    return pd.DataFrame(rows)
+            for stat in stats:
+                row = {
+                    "PARAMCD": pcd,
+                    "PARAM": param,
+                    "Visit": visit,
+                    "Statistic": stat,
+                }
+                for trt in trt_order:
+                    row[trt] = _stat(vdf[vdf["TRTA"] == trt]["AVAL"], stat)
+                rows.append(row)
+
+    return pd.DataFrame(rows, columns=["PARAMCD", "PARAM", "Visit", "Statistic", *trt_order])
 
 
 def _write_txt(df: pd.DataFrame, path: Path, title: str) -> None:
