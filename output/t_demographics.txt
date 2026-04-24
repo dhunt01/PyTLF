@@ -2,8 +2,8 @@ Table 1: Demographic and Baseline Characteristics (Safety Population)
 =====================================================================
 
 Characteristic               Placebo              ABC Drug 50 mg       Total              
+                             (N=25)               (N=25)               (N=50)             
 ------------------------------------------------------------------------------------------
-Number of Subjects (N)       25                   25                   50                 
 Age (years)                                                                               
   Mean (SD)                   51.40 (15.34)        43.08 (15.28)        47.24 (15.72)     
   Median (Min, Max)            55.0 (23.0, 72.0)    45.0 (23.0, 70.0)    50.0 (23.0, 72.0)
