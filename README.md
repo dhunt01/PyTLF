@@ -41,8 +41,11 @@ pip install -r requirements.txt
 python run_pipeline.py
 ```
 
-Tables are written to `output/` as both CSV (for downstream tooling) and
-fixed-width `.txt` (for human review).
+Each table is written to `output/` in four formats:
+- `.csv` — machine-readable, `(N=XX)` carried as a sub-header row
+- `.txt` — fixed-width report with two-line column headers
+- `.html` — styled HTML table with a two-row `<thead>`
+- `.pdf` — landscape PDF rendered via `reportlab` (`repeatRows=2`)
 
 ## Tables produced
 
