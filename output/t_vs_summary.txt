@@ -1,0 +1,36 @@
+Table 3: Summary Statistics of Vital Signs by Parameter and Visit
+=================================================================
+
+PARAMCD  PARAM                            Visit             N   Mean    SD     Median  Min    Max  
+---------------------------------------------------------------------------------------------------
+DIABP    Diastolic Blood Pressure (mmHg)  Screening         50  79.44   6.31   79.0    65.0   94.0 
+DIABP    Diastolic Blood Pressure (mmHg)  Baseline          50  80.56   5.85   80.5    67.0   98.0 
+DIABP    Diastolic Blood Pressure (mmHg)  Week 2            50  79.56   5.49   79.5    67.0   91.0 
+DIABP    Diastolic Blood Pressure (mmHg)  Week 4            49  79.9    6.18   80.0    63.0   92.0 
+DIABP    Diastolic Blood Pressure (mmHg)  Week 8            48  77.83   5.32   77.0    67.0   88.0 
+DIABP    Diastolic Blood Pressure (mmHg)  End Of Treatment  46  78.93   6.7    79.0    66.0   97.0 
+HEIGHT   Height (cm)                      Screening         50  168.61  8.66   168.7   145.8  190.1
+PULSE    Pulse Rate (beats/min)           Screening         50  72.02   7.03   71.5    53.0   87.0 
+PULSE    Pulse Rate (beats/min)           Baseline          50  71.7    6.52   71.0    59.0   87.0 
+PULSE    Pulse Rate (beats/min)           Week 2            50  71.3    7.03   70.5    56.0   86.0 
+PULSE    Pulse Rate (beats/min)           Week 4            49  72.84   5.68   73.0    60.0   82.0 
+PULSE    Pulse Rate (beats/min)           Week 8            48  71.04   7.26   72.0    56.0   85.0 
+PULSE    Pulse Rate (beats/min)           End Of Treatment  46  71.74   7.07   71.0    56.0   86.0 
+SYSBP    Systolic Blood Pressure (mmHg)   Screening         50  128.92  9.16   127.0   114.0  155.0
+SYSBP    Systolic Blood Pressure (mmHg)   Baseline          50  127.0   8.72   128.0   107.0  143.0
+SYSBP    Systolic Blood Pressure (mmHg)   Week 2            50  125.62  10.23  127.0   102.0  145.0
+SYSBP    Systolic Blood Pressure (mmHg)   Week 4            49  125.45  7.92   127.0   108.0  142.0
+SYSBP    Systolic Blood Pressure (mmHg)   Week 8            48  127.65  9.5    129.0   107.0  155.0
+SYSBP    Systolic Blood Pressure (mmHg)   End Of Treatment  46  127.02  9.61   125.5   105.0  147.0
+TEMP     Temperature (C)                  Screening         50  36.82   0.33   36.8    36.2   37.6 
+TEMP     Temperature (C)                  Baseline          50  36.81   0.28   36.8    36.2   37.3 
+TEMP     Temperature (C)                  Week 2            50  36.82   0.36   36.8    36.0   37.5 
+TEMP     Temperature (C)                  Week 4            49  36.74   0.34   36.8    35.9   37.6 
+TEMP     Temperature (C)                  Week 8            48  36.8    0.3    36.8    36.1   37.4 
+TEMP     Temperature (C)                  End Of Treatment  46  36.75   0.24   36.8    36.3   37.2 
+WEIGHT   Weight (kg)                      Screening         50  78.23   11.65  78.9    48.8   106.0
+WEIGHT   Weight (kg)                      Baseline          50  78.35   10.39  77.1    50.9   114.1
+WEIGHT   Weight (kg)                      Week 2            50  77.41   10.8   77.15   54.2   101.3
+WEIGHT   Weight (kg)                      Week 4            49  78.84   11.84  80.4    42.9   99.2 
+WEIGHT   Weight (kg)                      Week 8            48  79.36   12.0   77.3    52.5   115.2
+WEIGHT   Weight (kg)                      End Of Treatment  46  78.72   12.01  79.2    47.7   95.7 
